@@ -1,16 +1,39 @@
 "use client"
 import { useRouter } from "next/navigation"
 import { useForm } from "react-hook-form"
+import { auth, signInWithEmailAndPassword } from "../firebase"
+import { toast, ToastContainer } from "react-toastify"
+import { useState } from "react"
+
 
 const SignInComponent = () => {
+    const [isLoader , setIsLoader] = useState(false)
     const routes =  useRouter()
     const {
         register,
         handleSubmit,
+        reset,
         formState: { errors },
       } = useForm()
     
-    const onSubmit = (data) => console.log(data)
+    const onSubmit = ({email , password}) => {
+        setIsLoader(true)
+        signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          const user = userCredential.user;
+          toast.success('Successfully Sign in')
+          setIsLoader(false)
+          routes.push('/dashboard')
+          reset()
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          toast.error(errorCode)
+          setIsLoader(false)
+          reset()
+        });  
+    }
 
 
     const navigate = ()=>{
@@ -38,7 +61,7 @@ const SignInComponent = () => {
                   type="email"
                   {...register("email", { required: true })}
                   autoComplete="email"
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
+                  className="px-3 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
                 />
                 {errors.email && <span className="text-red-600 text-[12px]">This field is required</span>}
               </div>
@@ -62,7 +85,7 @@ const SignInComponent = () => {
                   type="password"
                   {...register("password", { required: true })}
                   autoComplete="current-password"
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
+                  className="px-3 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
                 />
                 {errors.password && <span className="text-red-600 text-[12px]">This field is required</span>}
               </div>
@@ -73,7 +96,7 @@ const SignInComponent = () => {
                 type="submit"
                 className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
-                Sign in
+                {isLoader ? 'Loading...' :'Sign in'}
               </button>
             </div>
           </form>
@@ -86,6 +109,7 @@ const SignInComponent = () => {
           </p>
         </div>
       </div>
+      <ToastContainer />
     </div>
   )
 }
