@@ -2,7 +2,7 @@
 
 import { image1 } from "../utils/constant/imagesImport"
 // import { HiBars3 } from "react-icons/hi2";
-import {Avatar,AvatarFallback,AvatarImage,} from "@/components/ui/avatar"
+import {Avatar,AvatarFallback} from "@/components/ui/avatar"
 
 
 const Header = () => {
