@@ -1,4 +1,4 @@
-import { Calendar, Home, Inbox, Search, Settings, ShoppingCart} from "lucide-react"
+import { Calendar, Home, Inbox, LogOut, Search, Settings, ShoppingCart} from "lucide-react"
 
 export const items = [
     {
@@ -30,5 +30,10 @@ export const items = [
       title: "Settings",
       url: "/settings",
       icon: Settings,
+    },
+    {
+      title: "LogOut",
+      url: "/logout",
+      icon: LogOut,
     },
   ]

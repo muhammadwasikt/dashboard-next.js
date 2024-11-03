@@ -25,6 +25,7 @@ const SignInComponent = () => {
         setIsLoader(true)
         signInWithEmailAndPassword(auth, email, password)
         .then(() => {
+          localStorage.setItem('email', email)
           toast.success('Successfully Sign in')
           setIsLoader(false)
           routes.push('/dashboard')
@@ -103,7 +104,7 @@ const SignInComponent = () => {
           </form>
 
           <p className="mt-10 text-center text-sm/6 text-gray-500">
-          Don't have an account:
+          Don&apos;t have an account:
             <span onClick={navigate} className="cursor-pointer font-semibold text-indigo-600 hover:text-indigo-500">
               Sign Up
             </span>
