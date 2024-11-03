@@ -25,7 +25,6 @@ const SignInComponent = () => {
         setIsLoader(true)
         signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
-          const user = userCredential.user;
           toast.success('Successfully Sign in')
           setIsLoader(false)
           routes.push('/dashboard')
