@@ -6,7 +6,7 @@ const Product = () => {
     const {products} = useContext(ProductContext)
 
   return (
-    <div className="p-2 w-[100%] h-[70vh] overflow-scroll grid grid-cols-3 gap-2 max-sm:grid-cols-1 max-sm:p-4">
+    <div className="p-2 w-[100%] h-[70vh] overflow-scroll grid xl:grid-cols-4 lg:grid-cols-3 gap-2 sm:grid-cols-2 max-sm:p-4">
       {
         products?.map((item) => {
             const {id , title , price ,description , image} = item
