@@ -1,12 +1,16 @@
 "use client"
 import { useRouter } from "next/navigation"
-import { useForm } from "react-hook-form"
+import { SubmitHandler, useForm } from "react-hook-form"
 import { auth, signInWithEmailAndPassword } from "../firebase"
 import { toast, ToastContainer } from "react-toastify"
 import { useState } from "react"
 
 
 const SignInComponent = () => {
+  interface DataProps{
+    email: string,
+    password: string
+  }
     const [isLoader , setIsLoader] = useState(false)
     const routes =  useRouter()
     const {
@@ -14,9 +18,10 @@ const SignInComponent = () => {
         handleSubmit,
         reset,
         formState: { errors },
-      } = useForm()
+      } = useForm<DataProps>()
     
-    const onSubmit = ({email , password}) => {
+    const onSubmit: SubmitHandler<DataProps>  = (data) => {
+      const  { email, password } = data
         setIsLoader(true)
         signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
@@ -57,7 +62,6 @@ const SignInComponent = () => {
               <div className="mt-2">
                 <input
                   id="email"
-                  name="email"
                   type="email"
                   {...register("email", { required: true })}
                   autoComplete="email"
@@ -81,7 +85,6 @@ const SignInComponent = () => {
               <div className="mt-2">
                 <input
                   id="password"
-                  name="password"
                   type="password"
                   {...register("password", { required: true })}
                   autoComplete="current-password"

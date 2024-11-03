@@ -31,6 +31,7 @@ const SignUpComponent = () => {
         createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 const user = userCredential.user;
+                localStorage.setItem("userName", name)
                 toast.success('Successfully create your account please sign in')
                 setIsLoader(false)
                 reset()

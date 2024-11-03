@@ -1,29 +1,34 @@
-import { Calendar, Home, Inbox, Search, Settings } from "lucide-react"
+import { Calendar, Home, Inbox, Search, Settings, ShoppingCart} from "lucide-react"
 
 export const items = [
     {
       title: "Home",
-      url: "#",
+      url: "/dashboard",
       icon: Home,
     },
     {
+      title: "Products",
+      url: "/products",
+      icon: ShoppingCart,
+    },
+    {
       title: "Inbox",
-      url: "#",
+      url: "/inbox",
       icon: Inbox,
     },
     {
       title: "Calendar",
-      url: "#",
+      url: "/calender",
       icon: Calendar,
     },
     {
       title: "Search",
-      url: "#",
+      url: "/search",
       icon: Search,
     },
     {
       title: "Settings",
-      url: "#",
+      url: "/settings",
       icon: Settings,
     },
   ]

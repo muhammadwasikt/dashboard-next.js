@@ -9,6 +9,12 @@ body {
   display: none;
 }
 
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;

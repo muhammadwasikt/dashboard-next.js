@@ -1,4 +1,4 @@
-import DashboardComponent from "@/app/components/Dashboard"
+import DashboardComponent from "@/app/components/Dashboard.tsx"
 
 
 const Dashboard = () => {
