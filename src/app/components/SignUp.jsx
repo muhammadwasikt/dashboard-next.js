@@ -29,7 +29,7 @@ const SignUpComponent = () => {
     const onSubmit = ({ email, password , name}) => {
         setIsLoader(true)
         createUserWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
+            .then(() => {
                 localStorage.setItem("userName", name)
                 toast.success('Successfully create your account please sign in')
                 setIsLoader(false)
@@ -38,7 +38,6 @@ const SignUpComponent = () => {
             })
             .catch((error) => {
                 const errorCode = error.code;
-                const errorMessage = error.message;
                 toast.error(errorCode)
                 setIsLoader(false)
                 reset()

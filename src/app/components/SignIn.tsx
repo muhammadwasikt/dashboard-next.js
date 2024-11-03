@@ -24,7 +24,7 @@ const SignInComponent = () => {
       const  { email, password } = data
         setIsLoader(true)
         signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
+        .then(() => {
           toast.success('Successfully Sign in')
           setIsLoader(false)
           routes.push('/dashboard')
@@ -32,7 +32,6 @@ const SignInComponent = () => {
         })
         .catch((error) => {
           const errorCode = error.code;
-          const errorMessage = error.message;
           toast.error(errorCode)
           setIsLoader(false)
           reset()
