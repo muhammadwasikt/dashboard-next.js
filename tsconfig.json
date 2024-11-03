@@ -21,6 +21,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/(pages)/(dashboard)/layout.jsx", "src/app/utils/context/UserContext.jsx", "src/app/components/LogOut.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/(pages)/(dashboard)/layout.jsx", "src/app/utils/context/UserContext.jsx", "src/app/components/LogOut.jsx", "src/app/components/common/ProductTable.jsx"],
   "exclude": ["node_modules"]
 }

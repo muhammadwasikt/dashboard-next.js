@@ -1,8 +1,9 @@
+import Product from '@/app/components/common/Product'
 
 const Products = () => {
   return (
     <div>
-      <h1>Products</h1>
+      <Product />
     </div>
   )
 }
