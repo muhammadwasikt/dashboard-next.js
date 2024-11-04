@@ -27,7 +27,6 @@ const SignInComponent = () => {
         .then(() => {
           toast.success('Successfully Sign in')
           setIsLoader(false)
-          routes.push('/dashboard')
           reset()
         })
         .catch((error) => {

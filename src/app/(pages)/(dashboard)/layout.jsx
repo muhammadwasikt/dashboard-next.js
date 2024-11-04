@@ -10,12 +10,11 @@ import { UserContext } from "@/app/utils/context/UserContext"
 
 const Layout = ({ children }) => {
   const {isUser} = useContext(UserContext)
-  console.log(isUser);
   
   
   return (
     <>
-      {isUser ? <div className="flex">
+      <div className="flex">
         <SidebarProvider>
           <SidebarComponent />
           <SidebarTrigger />
@@ -24,7 +23,7 @@ const Layout = ({ children }) => {
             {children}
           </div>
         </SidebarProvider>
-      </div>: <SignIn />}
+      </div>
     </>
   )
 }
