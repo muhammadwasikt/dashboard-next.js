@@ -10,6 +10,8 @@ import { UserContext } from "@/app/utils/context/UserContext"
 
 const Layout = ({ children }) => {
   const {isUser} = useContext(UserContext)
+  console.log(isUser);
+  
   
   return (
     <>

@@ -7,10 +7,7 @@ export const UserContext = createContext()
 
 export const UserProvider = ({children})=>{
     const [isUser , setIsUser] = useState(false)
-    const userCheck = onAuthStateChanged(auth, (user) => {
-     const userEmail = localStorage.getItem('email')
-     console.log(userEmail);
-     
+    const userCheck = onAuthStateChanged(auth, (user) => {     
         if (user) {
           setIsUser(true)
         } else {
@@ -20,7 +17,7 @@ export const UserProvider = ({children})=>{
 
       useEffect(()=>{
         userCheck()
-      },[isUser])
+      },[])
     return(
         <UserContext.Provider value={{isUser , setIsUser}}>
             {children}

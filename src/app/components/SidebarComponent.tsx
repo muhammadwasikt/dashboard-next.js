@@ -13,7 +13,6 @@ import {
 import { items } from "../utils/constant/sidebarlink"
 import Link from "next/link"
 
-console.log(items[1].url);
 
 
 export function SidebarComponent() {

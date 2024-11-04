@@ -25,7 +25,6 @@ const SignInComponent = () => {
         setIsLoader(true)
         signInWithEmailAndPassword(auth, email, password)
         .then(() => {
-          localStorage.setItem('email', email)
           toast.success('Successfully Sign in')
           setIsLoader(false)
           routes.push('/dashboard')
