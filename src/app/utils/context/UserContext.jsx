@@ -15,7 +15,7 @@ export const UserProvider = ({children})=>{
 
       useEffect(()=>{
         userCheck()
-      },[])
+      },[isUser])
     return(
         <UserContext.Provider value={{isUser , setIsUser}}>
             {children}

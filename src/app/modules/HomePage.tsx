@@ -5,10 +5,12 @@ import { UserContext } from "../utils/context/UserContext"
 import LayOut from "../(pages)/(dashboard)/layout"
 
 const HomePage = () => {
-  const {isUser} = useContext(UserContext)
+  const { isUser } = useContext(UserContext)
   return (
     <div>
-       {isUser ? <LayOut children /> :<SignIn />}
+      {isUser ? <LayOut>
+        children
+      </LayOut> : <SignIn />}
     </div>
   )
 }

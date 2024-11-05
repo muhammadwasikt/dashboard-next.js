@@ -1,8 +1,6 @@
 "use client"
 import Buton from './common/Buton'
 import {BadgeAlert} from 'lucide-react'
-import { useContext } from 'react'
-import { UserContext } from '../utils/context/UserContext'
 import { useRouter } from 'next/navigation'
 import { auth, signOut } from '../firebase'
 
