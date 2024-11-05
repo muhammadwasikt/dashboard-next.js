@@ -12,7 +12,7 @@ const SignInComponent = () => {
     password: string
   }
     const [isLoader , setIsLoader] = useState(false)
-    const routes =  useRouter()
+    const router =  useRouter()
     const {
         register,
         handleSubmit,
@@ -26,8 +26,9 @@ const SignInComponent = () => {
         signInWithEmailAndPassword(auth, email, password)
         .then(() => {
           toast.success('Successfully Sign in')
-          setIsLoader(false)
           reset()
+          setIsLoader(false)
+          router.push('/dashboard')
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -39,7 +40,7 @@ const SignInComponent = () => {
 
 
     const navigate = ()=>{
-        routes.push('/sign-up')
+        router.push('/sign-up')
     }
   return (
     <div>
@@ -51,7 +52,7 @@ const SignInComponent = () => {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form action="#" method="POST" className="space-y-6" onClick={handleSubmit(onSubmit)}>
+          <form action="#" method="POST" className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
             <div>
               <label htmlFor="email" className="block text-sm/6 font-medium text-gray-900">
                 Email address

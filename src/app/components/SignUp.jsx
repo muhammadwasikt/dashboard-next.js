@@ -1,52 +1,40 @@
 "use client"
-import { useRouter } from "next/navigation"
-import { useForm } from "react-hook-form"
-import { toast, ToastContainer } from "react-toastify"
-import { addDoc, auth, collection, createUserWithEmailAndPassword, db } from "../firebase"
-import { useState } from "react"
+import { useRouter } from "next/navigation";
+import { useForm } from "react-hook-form";
+import { toast, ToastContainer } from "react-toastify";
+import { addDoc, auth, collection, createUserWithEmailAndPassword, db } from "../firebase";
+import { useState } from "react";
 
 const SignUpComponent = () => {
-    const [isLoader , setIsLoader] = useState(false)
-    const routes = useRouter()
-    const {
-        register,
-        handleSubmit,
-        reset,
-        formState: { errors },
-    } = useForm()
-
-    const dataSubmit = async (e)=>{
-        try {
-            const docRef = await addDoc(collection(db, "users"), {
-              first: e,
-            });
-            console.log("Document written with ID: ", docRef.id);
-          } catch (e) {
-            console.error("Error adding document: ", e);
-          }
-          
-    }
-    const onSubmit = ({ email, password , name}) => {
-        setIsLoader(true)
-        createUserWithEmailAndPassword(auth, email, password)
-            .then(() => {
-                localStorage.setItem("userName", name)
-                toast.success('Successfully create your account please sign in')
-                setIsLoader(false)
-                reset()
-                dataSubmit(name)
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                toast.error(errorCode)
-                setIsLoader(false)
-                reset()
-            });
-    }
-
+    const [isLoader, setIsLoader] = useState(false);
+    const routes = useRouter();
+    const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
     const navigate = () => {
-        routes.push('/sign-in')
+        routes.push('/sign-in');
+    };
+
+    const addData = async ({name , uid})=>{
+        await addDoc(collection(db, "email"), {
+            userName: name,
+            uid: uid,
+        })
+    }
+    const onSubmit = async ({ email, password, name }) => {
+        setIsLoader(true);
+        try {
+            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+            const uid = userCredential.user.uid
+            toast.success('Successfully created your account.');
+            await addData({name , uid})
+            setIsLoader(false);
+            reset();
+        } catch (error) {
+            const errorCode = error.code;
+            toast.error(errorCode);
+            setIsLoader(false);
+            reset();
+        }
     }
     return (
         <div>
@@ -58,9 +46,9 @@ const SignUpComponent = () => {
                 </div>
 
                 <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-                    <form action="#" method="POST" className="space-y-6" onClick={handleSubmit(onSubmit)}>
-                        
-                    <div>
+                    <form action="#" method="POST" className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
+
+                        <div>
                             <label htmlFor="name" className="block text-sm/6 font-medium text-gray-900">
                                 Your name
                             </label>
@@ -76,7 +64,7 @@ const SignUpComponent = () => {
                                 {errors.name && <span className="text-red-600 text-[12px]">This field is required</span>}
                             </div>
                         </div>
-                        
+
                         <div>
                             <label htmlFor="email" className="block text-sm/6 font-medium text-gray-900">
                                 Email address
@@ -105,6 +93,7 @@ const SignUpComponent = () => {
                                     id="password"
                                     name="password"
                                     type="password"
+                                    maxLength="8"
                                     {...register("password", { required: true })}
                                     autoComplete="current-password"
                                     className="block w-full px-3 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
@@ -118,7 +107,7 @@ const SignUpComponent = () => {
                                 type="submit"
                                 className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                             >
-                                {isLoader? 'Loading...' :'Sign Up'}
+                                {isLoader ? 'Loading...' : 'Sign Up'}
                             </button>
                         </div>
                     </form>
@@ -135,5 +124,6 @@ const SignUpComponent = () => {
         </div>
     )
 }
+
 
 export default SignUpComponent

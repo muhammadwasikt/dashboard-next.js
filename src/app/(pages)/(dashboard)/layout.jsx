@@ -1,16 +1,15 @@
 'use client'
-import Header from "@/app/components/Header"
+import Header from "@/app/components/Header.jsx"
 import { SidebarComponent } from "@/app/components/SidebarComponent"
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
-import SignIn from "../sign-in/page"
 import { useContext } from "react"
 import { UserContext } from "@/app/utils/context/UserContext"
+import SignIn from "../sign-in/page"
 
 
 
-const Layout = ({ children }) => {
+const LayOut = ({ children }) => {
   const {isUser} = useContext(UserContext)
-  
   
   return (
     <>
@@ -28,4 +27,4 @@ const Layout = ({ children }) => {
   )
 }
 
-export default Layout
+export default LayOut

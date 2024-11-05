@@ -8,12 +8,11 @@ import { auth, signOut } from '../firebase'
 
 
 const LogOut = () => {
-  const {setIsUser} = useContext(UserContext)
   const router = useRouter()
 
   const userSignOut = ()=>{
     signOut(auth).then(() => {
-      setIsUser(false)
+      router.push('/sign-in')
     }).catch((error) => {
       console.error(error)
     });
